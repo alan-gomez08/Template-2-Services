@@ -1,23 +1,24 @@
-import type { ClientData } from '../../types';
 import NavbarT1 from './components/NavbarT1';
 import HeroT1 from './components/HeroT1';
+import NosotrosT1 from './components/NosotrosT1';
+import MenuT1 from './components/MenuT1';
+import StatsT1 from './components/StatsT1';
+import TestimonialsT1 from './components/TestimonialsT1';
+import LocationT1 from './components/LocationT1';
+import FooterT1 from './components/FooterT1';
+import { clientConfig } from '../../config/client';
 
-interface Props {
-  data: ClientData;
-}
-
-export default function Template1({ data }: Props) {
+export default function Template1() {
   return (
-    <div className="relative w-full min-h-screen bg-black">
-      {/* 1. Navegación */}
-      <div className="absolute top-0 left-0 w-full z-50">
-        <NavbarT1 data={data} />
-      </div>
-      
-      {/* 2. Contenido Principal */}
-      <main>
-        <HeroT1 data={data} />
-      </main>
-    </div>
+    <main className="w-full min-h-screen bg-zinc-950 font-sans">
+      <NavbarT1 data={clientConfig} />
+      <HeroT1 data={clientConfig} />
+      <NosotrosT1 data={clientConfig} />
+      <MenuT1 data={clientConfig} />
+      <StatsT1 data={clientConfig} />
+      <TestimonialsT1 data={clientConfig} />
+      <LocationT1 data={clientConfig} />
+      <FooterT1 data={clientConfig} />
+    </main>
   );
 }

@@ -1,15 +1,5 @@
-
-// Definimos que solo existen estas 4 plantillas
-export type TemplateType = 'template-1' | 'template-2' | 'template-3' | 'template-4';
-
-export interface SocialLinks {
-  whatsapp: string; // Obligatorio
-  instagram?: string; // Opcional (por eso el signo de interrogación)
-  facebook?: string;
-}
-
 export interface ClientData {
-  templateId: TemplateType;
+  templateId: string;
   businessName: string;
   theme: {
     primaryColor: string;
@@ -23,6 +13,61 @@ export interface ClientData {
       desktop: string;
       tablet: string;
       mobile: string;
+    };
   };
-  contact: SocialLinks;
+  about: {
+    title: string;
+    subtitle: string;
+    description: string;
+    images: {
+      desktop: string;
+      tablet: string;
+      mobile: string;
+    };
+  };
+  menu: {
+    title: string;
+    categories: string[];
+    items: {
+      id: string;
+      title: string;
+      description: string;
+      price: string;
+      imagePath: string;
+      category: string;
+    }[];
+  };
+  stats: {
+    title: string;
+    items: {
+      value: string;
+      label: string;
+    }[];
+  };
+  events: {
+    title: string;
+    description: string;
+    buttonText: string;
+  };
+  testimonials: {
+    title: string;
+    items: {
+      id: string;
+      name: string;
+      text: string;
+      imagePath: string;
+      rating: number;
+    }[];
+  };
+  location: {
+    title: string;
+    description: string;
+    buttonText: string;
+    mapEmbedUrl: string;
+  };
+  contact: {
+    whatsapp: string;
+    instagram: string;
+    facebook: string;
+  };
 }

@@ -7,73 +7,64 @@ interface Props {
 
 export default function NavbarT1({ data }: Props) {
   const [isOpen, setIsOpen] = useState(false);
-  
-  const navLinks = ['Inicio', 'Nosotros', 'Menú', 'Reseñas', 'Contacto'];
 
-  // Lógica para la versión Tablet: Tu diseño de Figma tiene el logo en dos colores.
-  // Dividimos dinámicamente el nombre del cliente en la primera palabra y el resto.
-  const [firstWord, ...restWords] = data.businessName.split(' ');
-  const restOfName = restWords.join(' ');
+  const links = [
+    { name: 'Inicio', href: '#inicio' },
+    { name: 'Nosotros', href: '#nosotros' },
+    { name: 'Menú', href: '#menu' },
+    { name: 'Reseñas', href: '#resenas' },
+    { name: 'Contacto', href: '#ubicacion' },
+  ];
 
   return (
-    <nav className="w-full absolute lg:relative top-0 left-0 z-50 flex items-center justify-between px-8 lg:px-32 h-24 lg:h-32 bg-gradient-to-b from-black/80 to-transparent lg:bg-black lg:from-transparent lg:to-transparent">
-      
-      {/* 1. Logo Dinámico */}
-      <div className="cursor-pointer flex gap-1">
-        {/* Versión Mobile / Desktop (Color unificado - Lexend Deca) */}
-        <span className="text-xl lg:text-3xl font-semibold text-white font-['Lexend_Deca'] md:hidden lg:block">
-          {data.businessName}
-        </span>
+    <nav className="fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-blur-lg border-b border-white/10 transition-all">
+      <div className="w-full max-w-[1170px] mx-auto px-6 md:px-12 h-20 flex justify-between items-center">
         
-        {/* Versión Tablet (Dos colores - Inter) */}
-        <div className="hidden md:flex lg:hidden text-lg leading-7">
-          <span className="text-neutral-100 font-black font-['Inter']">{firstWord}&nbsp;</span>
-          {restOfName && <span className="text-neutral-400 font-medium font-['Inter']">{restOfName}</span>}
-        </div>
-      </div>
+        {/* Logo */}
+        <a href="#inicio" className="text-white text-2xl font-black font-['Inter'] tracking-tight">
+          {data.businessName}
+        </a>
 
-      {/* 2. Menú Desktop (Oculto en móvil y tablet) */}
-      <ul className="hidden lg:flex items-center gap-2">
-        {navLinks.map((link, index) => (
-          <li key={link}>
-            <a
-              href={`#${link.toLowerCase()}`}
-              // El primer link (Inicio) es semibold, el resto medium, tal como tu JSX
-              className={`px-4 py-4 text-lg font-['Inter'] rounded-[10px] transition-colors hover:bg-white/10 text-white ${index === 0 ? 'font-semibold' : 'font-medium'}`}
+        {/* Links Desktop */}
+        <div className="hidden md:flex gap-8">
+          {links.map((link) => (
+            <a 
+              key={link.name} 
+              href={link.href}
+              className="text-[#A3A3A3] hover:text-white text-sm font-medium font-['Inter'] transition-colors"
             >
-              {link}
-            </a>
-          </li>
-        ))}
-      </ul>
-
-      {/* 3. Menú Hamburguesa (Visible solo en móvil y tablet) */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="flex lg:hidden flex-col justify-center items-center gap-1.5 p-1 focus:outline-none z-50"
-        aria-label="Abrir menú"
-      >
-        {/* Reemplazamos los SVGs crudos por divs de Tailwind (mucho más limpio) */}
-        <div className={`w-6 h-[2px] bg-white rounded-full transition-transform duration-300 ${isOpen ? 'rotate-45 translate-y-[8px]' : ''}`}></div>
-        <div className={`w-6 h-[2px] bg-white rounded-full transition-opacity duration-300 ${isOpen ? 'opacity-0' : ''}`}></div>
-        <div className={`w-6 h-[2px] bg-white rounded-full transition-transform duration-300 ${isOpen ? '-rotate-45 -translate-y-[8px]' : ''}`}></div>
-      </button>
-
-{/* 4. Desplegable Mobile (Funcionalidad extra) */}
-      {isOpen && (
-        <div className="absolute top-24 left-0 w-full bg-black/95 backdrop-blur-md flex flex-col items-center py-8 gap-6 lg:hidden shadow-xl border-t border-white/10">
-          {navLinks.map((link) => (
-            <a
-              key={link}
-              href={`#${link.toLowerCase()}`}
-              onClick={() => setIsOpen(false)}
-              className="text-xl font-medium text-white font-['Inter'] active:text-gray-400"
-            >
-              {link}
+              {link.name}
             </a>
           ))}
         </div>
-      )}
+
+        {/* Botón Menú Mobile */}
+        <button 
+          onClick={() => setIsOpen(!isOpen)}
+          className="md:hidden text-white p-2"
+          aria-label="Toggle Menu"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={isOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
+          </svg>
+        </button>
+      </div>
+
+      {/* Menú Mobile Desplegable */}
+      <div className={`md:hidden absolute top-20 left-0 w-full bg-[#111] border-b border-white/10 transition-all duration-300 ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
+        <div className="flex flex-col p-6 gap-6">
+          {links.map((link) => (
+            <a 
+              key={link.name} 
+              href={link.href}
+              onClick={() => setIsOpen(false)}
+              className="text-[#A3A3A3] text-lg font-medium font-['Inter']"
+            >
+              {link.name}
+            </a>
+          ))}
+        </div>
+      </div>
     </nav>
   );
 }
