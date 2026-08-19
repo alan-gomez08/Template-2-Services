@@ -10,7 +10,7 @@ import { clientConfig } from '../../config/client';
 
 export default function Template1() {
   return (
-    <main className="w-full min-h-screen bg-zinc-950 font-sans">
+    <main className="w-full max-w-[100vw] min-h-screen bg-[#000000] font-sans overflow-x-hidden">
       <NavbarT1 data={clientConfig} />
       <HeroT1 data={clientConfig} />
       <NosotrosT1 data={clientConfig} />

@@ -96,7 +96,7 @@ export const clientConfig: ClientData = {
     buttonText: 'Consultar para Eventos',
   },
   testimonials: {
-    title: 'What Our Clients Are Saying',
+    title: 'Lo que dicen nuestros clientes',
     items: [
       {
         id: '1',

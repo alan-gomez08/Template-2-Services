@@ -7,22 +7,22 @@ interface Props {
 
 export default function NosotrosT1({ data }: Props) {
   return (
-    <section id="nosotros" className="w-full bg-black py-20 md:py-32 flex justify-center">
+    <section id="nosotros" className="w-full bg-black py-[60px] lg:py-[100px] flex justify-center">
       <div className="w-full max-w-[1170px] mx-auto px-6 md:px-12">
         <ScrollReveal>
-          <div className="flex flex-col gap-12 lg:gap-20">
+          <div className="flex flex-col gap-12 lg:gap-[80px]">
             
             <div className="flex flex-col items-center gap-4 lg:gap-6 text-center max-w-3xl mx-auto">
-              <h2 className="text-[#F5F5F5] text-3xl md:text-[40px] lg:text-[50px] font-bold md:font-black font-['Inter'] leading-tight">
+              <h2 className="text-[#F5F5F5] text-3xl md:text-[40px] lg:text-[50px] font-bold leading-tight">
                 {data.about.title}
               </h2>
-              <p className="text-[#A3A3A3] text-[15px] lg:text-[20px] font-normal font-['Inter'] leading-relaxed">
+              <p className="text-[#A3A3A3] text-[15px] lg:text-[20px] font-normal leading-relaxed">
                 {data.about.subtitle}
               </p>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-[87px] items-center">
-              <div className="text-[#A3A3A3] lg:text-[#EEEEEE] text-[15px] lg:text-[18px] font-normal font-['Inter'] leading-relaxed text-center lg:text-left">
+              <div className="text-[#A3A3A3] lg:text-[#EEEEEE] text-[15px] lg:text-[18px] font-normal leading-relaxed text-center lg:text-left">
                 {data.about.description}
               </div>
 

@@ -1,8 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: relative;
+}
+
 html {
-  scroll-behavior: smooth; /* Scrolleo suave al clickear en la Navbar */
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Altura exacta de la Navbar */
 }
 
 body {
@@ -11,7 +18,21 @@ body {
   color: #FFFFFF;
 }
 
-/* Ocultar barra de scroll para los carruseles horizontales */
+@keyframes fadeSlideUp {
+  0% { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  100% { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+.animate-menu-fade {
+  animation: fadeSlideUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }

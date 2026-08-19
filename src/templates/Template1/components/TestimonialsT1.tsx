@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import type { ClientData } from '../../../types';
 import ScrollReveal from './ScrollReveal';
 
@@ -6,56 +7,93 @@ interface Props {
 }
 
 export default function TestimonialsT1({ data }: Props) {
+  const sliderRef = useRef<HTMLDivElement>(null);
+
+  const scrollLeft = () => {
+    if (sliderRef.current) {
+      sliderRef.current.scrollLeft -= 320;
+    }
+  };
+  
+  const scrollRight = () => {
+    if (sliderRef.current) {
+      sliderRef.current.scrollLeft += 320;
+    }
+  };
+
   return (
-    <section id="resenas" className="w-full bg-black py-20 lg:py-[120px] flex justify-center overflow-hidden">
-      <div className="w-full max-w-[1170px] mx-auto px-6 md:px-12">
+    <section id="resenas" className="w-full bg-[#0A0A0A] py-[60px] lg:py-[100px] flex justify-center overflow-hidden">
+      <div className="w-full max-w-[1170px] mx-auto flex flex-col items-center">
+        
         <ScrollReveal>
-          <div className="flex flex-col items-center w-full">
-            <h2 className="text-white text-[32px] md:text-[40px] lg:text-[50px] font-bold text-center mb-10 lg:mb-[70px]">
-              {data.testimonials.title}
-            </h2>
-            
-            <div className="w-full flex lg:grid lg:grid-cols-3 gap-6 lg:gap-[30px] overflow-x-auto lg:overflow-visible snap-x snap-mandatory pb-8 lg:pb-0 hide-scrollbar">
-              {data.testimonials.items.map((review) => (
-                <article 
-                  key={review.id} 
-                  className="min-w-[85vw] md:min-w-[340px] lg:min-w-0 snap-center bg-[#191919] rounded-[16px] p-8 lg:p-[40px] flex flex-col justify-start gap-6"
-                >
-                  <div className="flex items-center gap-4">
-                    <img 
-                      src={review.imagePath} 
-                      alt={review.name} 
-                      className="w-[56px] h-[56px] lg:w-[74px] lg:h-[74px] rounded-full object-cover"
-                    />
-                    <div className="flex flex-col gap-1">
-                      <h3 className="text-white text-[16px] lg:text-[18px] font-bold">
-                        {review.name}
-                      </h3>
-                      <div className="flex gap-1">
-                        {[...Array(review.rating)].map((_, i) => (
-                          <svg key={i} className="w-[14px] h-[14px] text-[#FF9901]" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                        ))}
-                      </div>
+          <h2 className="text-white text-[28px] sm:text-[32px] md:text-[40px] lg:text-[50px] font-bold text-center mb-10 lg:mb-[80px] px-4 max-w-[300px] sm:max-w-md lg:max-w-none mx-auto leading-snug break-words">
+            {data.testimonials.title}
+          </h2>
+        </ScrollReveal>
+        
+        <div className="flex flex-col items-center w-full">
+          <div 
+            ref={sliderRef}
+            className="w-full flex lg:grid lg:grid-cols-3 gap-5 lg:gap-[30px] justify-start items-stretch overflow-x-auto lg:overflow-visible snap-x snap-mandatory scroll-smooth px-6 scroll-pl-6 lg:px-12 lg:scroll-pl-12 pb-4 lg:pb-0 hide-scrollbar"
+          >
+            {data.testimonials.items.map((review) => (
+              <article 
+                key={review.id} 
+                className="shrink-0 flex-none w-[300px] sm:w-[340px] lg:w-full snap-start bg-[#191919] rounded-[24px] p-8 lg:p-[40px] flex flex-col justify-start border border-white/5 hover:border-white/10 transition-colors"
+              >
+                <div className="flex items-center gap-4 mb-6">
+                  <img 
+                    src={review.imagePath} 
+                    alt={review.name} 
+                    className="w-[56px] h-[56px] lg:w-[74px] lg:h-[74px] rounded-full object-cover"
+                  />
+                  <div className="flex flex-col gap-1">
+                    <h3 className="text-white text-[16px] lg:text-[18px] font-bold">
+                      {review.name}
+                    </h3>
+                    <div className="flex gap-1">
+                      {[...Array(review.rating)].map((_, i) => (
+                        <svg key={i} className="w-[14px] h-[14px] text-[#FF9901]" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                      ))}
                     </div>
                   </div>
-                  
-                  {/* Ícono de Comillas (Quote) */}
-                  <div className="text-white text-5xl font-serif leading-[0px] mt-4 mb-2 opacity-80">
-                    “
-                  </div>
-                  
-                  <div className="w-full h-[1px] bg-white/10 lg:w-[195px]"></div>
-                  
-                  <p className="text-[#A3A3A3] text-[15px] lg:text-[18px] font-normal leading-relaxed">
-                    {review.text}
-                  </p>
-                </article>
-              ))}
-            </div>
+                </div>
+                
+                <svg className="w-8 h-8 text-white mb-5 opacity-90" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                </svg>
+                
+                <div className="w-full h-[1px] bg-white/10 lg:w-[195px] mb-6"></div>
+                
+                <p className="text-[#A3A3A3] text-[15px] lg:text-[18px] font-normal leading-relaxed">
+                  {review.text}
+                </p>
+              </article>
+            ))}
           </div>
-        </ScrollReveal>
+
+          <div className="flex lg:hidden justify-center items-center gap-6 mt-8">
+            <button 
+              type="button"
+              onClick={scrollLeft} 
+              className="w-12 h-12 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-white hover:bg-white/20 active:scale-90 transition-all z-10"
+              aria-label="Anterior"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+            </button>
+            <button 
+              type="button"
+              onClick={scrollRight} 
+              className="w-12 h-12 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-white hover:bg-white/20 active:scale-90 transition-all z-10"
+              aria-label="Siguiente"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+            </button>
+          </div>
+
+        </div>
       </div>
     </section>
   );
