@@ -1,20 +1,21 @@
 import type { ClientData } from '../types/index';
 
 export const clientConfig: ClientData = {
-  templateId: 'template-1',
+  templateId: 'template-2', // Ya lo tenías cambiado
   businessName: 'Tu Logo',
   theme: {
-    primaryColor: '#ec4899', 
+    primaryColor: '#E58411', // El naranja del nuevo template
     secondaryColor: '#1e293b',
   },
   hero: {
-    title: 'Bienvenidos! Preparamos El Mejor Sabor Para Vos.',
-    subtitle: 'Ingredientes frescos, recetas auténticas y porciones generosas. Elegí lo que más te guste y te lo preparamos en el momento.',
-    buttonText: 'Hacer Pedido por WhatsApp',
+    // Podés actualizar los textos acá también si querés que sean dinámicos
+    title: 'Transformá tu casa en tu lugar favorito.',
+    subtitle: 'Muebles de autor con envíos a todo el país. Visitá nuestro showroom o comprá online.',
+    buttonText: 'Agendar visita al Showroom',
     images: {
-      desktop: '/assets-t1/hero-desktop.webp',
-      tablet: '/assets-t1/hero-tablet.webp',
-      mobile: '/assets-t1/hero-mobile.webp',
+      desktop: '/assets-t2/hero-desktop.webp', // <-- ACÁ ESTÁ LA MAGIA
+      tablet: '/assets-t2/hero-tablet.webp',   // <-- ACÁ ESTÁ LA MAGIA
+      mobile: '/assets-t2/hero-mobile.webp',   // <-- ACÁ ESTÁ LA MAGIA
     },
   },
   about: {
