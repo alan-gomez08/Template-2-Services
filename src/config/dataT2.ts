@@ -1,0 +1,1 @@
+import { configT2 } from '../../config/dataT2';

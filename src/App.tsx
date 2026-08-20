@@ -4,7 +4,7 @@ import Template3 from './templates/Template3/Template3';
 import Template4 from './templates/Template4/Template4';
 
 function App() {
-  // Leemos qué template pidió Vercel (o tu terminal). Si no hay nada, carga el 1.
+ 
   const activeTemplate = import.meta.env.VITE_TEMPLATE_ID || 'template-1';
 
   return (
