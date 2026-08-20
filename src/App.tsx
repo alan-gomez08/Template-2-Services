@@ -1,8 +1,8 @@
-import Template3 from './templates/Template3/Template3';
+import Template4 from './templates/Template4/Template4';
 
 function App() {
   return (
-    <Template3 />
+    <Template4 />
   );
 }
 
