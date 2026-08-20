@@ -7,12 +7,12 @@ interface Props {
 }
 
 export default function MenuT1({ data }: Props) {
-  const [activeCategory, setActiveCategory] = useState('Todo');
+  // Cambiamos 'Todo' por 'Destacados'
+  const [activeCategory, setActiveCategory] = useState('Destacados');
   const sliderRef = useRef<HTMLDivElement>(null);
 
-  const filteredItems = activeCategory === 'Todo' 
-    ? data.menu.items 
-    : data.menu.items.filter(item => item.category === activeCategory);
+  // Filtramos estrictamente por la categoría seleccionada
+  const filteredItems = data.menu.items.filter(item => item.category === activeCategory);
 
   useEffect(() => {
     if (sliderRef.current) {
@@ -73,12 +73,20 @@ export default function MenuT1({ data }: Props) {
                   key={item.id} 
                   className="shrink-0 flex-none w-[280px] sm:w-[320px] lg:w-auto snap-start bg-[#141414] rounded-[24px] p-6 flex flex-col gap-6 border border-white/5 hover:border-white/10 transition-colors"
                 >
-                  <div className="w-full aspect-[4/3] flex items-center justify-center">
-                    <img 
-                      src={item.imagePath} 
-                      alt={item.title} 
-                      className="w-full h-full object-contain drop-shadow-xl"
-                    />
+                  <div className="w-full aspect-[4/3] flex items-center justify-center bg-[#1A1A1A] rounded-[16px] overflow-hidden relative">
+                    {/* Si no hay imagen, mostramos un fondo con un icono de placeholder */}
+                    {item.imagePath ? (
+                      <img 
+                        src={item.imagePath} 
+                        alt={item.title} 
+                        className="w-full h-full object-contain drop-shadow-xl p-2"
+                      />
+                    ) : (
+                      <div className="text-[#333333] flex flex-col items-center gap-2">
+                        <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                        <span className="text-[12px] font-medium">Imagen pendiente</span>
+                      </div>
+                    )}
                   </div>
                   <div className="flex flex-col gap-3 flex-grow">
                     <div className="flex items-start">
