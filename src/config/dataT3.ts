@@ -6,8 +6,8 @@ export const configT3: ClientData = {
   theme: { primaryColor: '#2563EB', secondaryColor: '#0F172A' },
   
   hero: { 
-    title: 'Soluciones\nCorporativas', 
-    subtitle: 'Llevamos la contabilidad y el marco legal de tu empresa al siguiente nivel.', 
+    title: 'Protegemos tu patrimonio y optimizamos tus impuestos', 
+    subtitle: 'Asesoramiento contable y jurídico integral para empresas y profesionales. Decisiones estratégicas con respaldo legal.', 
     buttonText: 'Agendar Asesoría', 
     images: { 
       desktop: '/assets-t3/hero-desktop.webp', 

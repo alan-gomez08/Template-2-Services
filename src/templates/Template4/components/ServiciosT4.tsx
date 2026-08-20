@@ -6,38 +6,8 @@ interface Props {
 }
 
 export default function ServiciosT4({ data }: Props) {
-  const services = [
-    {
-      title: 'Remoción de Moho',
-      description: 'Eliminación completa de moho negro, verde y blanco de todas las superficies de su propiedad con técnicas especializadas.',
-      iconPath: '/assets-t4/icon-remocion.svg'
-    },
-    {
-      title: 'Inspección y Análisis',
-      description: 'Evaluación profesional con equipos de detección avanzados para identificar moho oculto en paredes, techos y espacios.',
-      iconPath: '/assets-t4/icon-inspeccion.svg'
-    },
-    {
-      title: 'Purificación del Aire',
-      description: 'Limpieza del aire con sistemas HEPA para eliminar esporas de moho y mejorar la calidad del aire interior.',
-      iconPath: '/assets-t4/icon-purificacion.svg'
-    },
-    {
-      title: 'Tratamiento Residencial',
-      description: 'Servicios especializados para hogares, sótanos, áticos, baños y áreas propensas a humedad.',
-      iconPath: '/assets-t4/icon-residencial.svg'
-    },
-    {
-      title: 'Servicios Comerciales',
-      description: 'Soluciones para oficinas, restaurantes, hoteles y propiedades comerciales con mínima interrupción operativa.',
-      iconPath: '/assets-t4/icon-comercial.svg'
-    },
-    {
-      title: 'Prevención y Sellado',
-      description: 'Tratamientos preventivos y sellado de áreas para evitar el crecimiento futuro de moho y hongos.',
-      iconPath: '/assets-t4/icon-prevencion.svg'
-    }
-  ];
+  // Filtramos solo los ítems que correspondan a la categoría de servicios
+  const services = data.menu.items.filter(item => item.category === 'servicios');
 
   return (
     <section id="servicios" className="w-full bg-white py-16 lg:py-20 scroll-mt-[64px]">
@@ -47,10 +17,10 @@ export default function ServiciosT4({ data }: Props) {
         <ScrollReveal>
           <div className="flex flex-col items-center text-center mb-12 lg:mb-16">
             <h2 className="text-slate-800 text-[32px] md:text-[40px] lg:text-[48px] font-bold font-['Arimo'] leading-tight mb-4">
-              Nuestros Servicios Especializados
+              {data.menu.title}
             </h2>
             <p className="text-slate-500 lg:text-gray-600 text-[16px] lg:text-[20px] font-normal font-['Arimo'] lg:font-['Inter'] leading-relaxed max-w-[768px]">
-              Ofrecemos soluciones completas de eliminación de moho con tecnología de punta y personal altamente capacitado.
+              {data.menu.categories[0]}
             </p>
           </div>
         </ScrollReveal>
@@ -62,7 +32,7 @@ export default function ServiciosT4({ data }: Props) {
               <article className="h-full p-8 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-[16px] border border-emerald-100 hover:shadow-lg transition-shadow duration-300 flex flex-col justify-start items-start group">
                 <div className="w-14 h-14 bg-[#059669] rounded-[10px] flex justify-center items-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-md">
                   <img 
-                    src={service.iconPath} 
+                    src={service.imagePath} 
                     alt={`Ícono de ${service.title}`} 
                     className="w-7 h-7 object-contain brightness-0 invert" 
                   />

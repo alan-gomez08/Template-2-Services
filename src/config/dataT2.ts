@@ -5,9 +5,9 @@ export const configT2: ClientData = {
   businessName: 'Tu Marca de Muebles',
   theme: { primaryColor: '#000000', secondaryColor: '#ffffff' },
   hero: { 
-    title: 'Diseño Que\nTransforma Tu Hogar', 
-    subtitle: 'Descubrí nuestra nueva colección de sillones y muebles de diseño. Confort y elegancia para cada rincón de tu casa.', 
-    buttonText: 'Ver Colección', 
+    title: 'Transforma tu casa en tu Lugar Favorito', 
+    subtitle: 'Muebles de autor con envíos a todo el país. Visitá nuestro showroom o comprá online.', 
+    buttonText: 'Agendar visita al Showroom', 
     images: { 
       desktop: '/assets-t2/hero-desktop.webp', 
       tablet: '/assets-t2/hero-tablet.webp', 
