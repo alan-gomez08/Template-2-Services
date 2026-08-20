@@ -1,23 +1,26 @@
 import type { ClientData } from '../types/index';
 
 export const clientConfig: ClientData = {
-  templateId: 'template-2', // Ya lo tenías cambiado
-  businessName: 'Tu Logo',
+  templateId: 'template-3', // Activamos el Template 3
+  businessName: 'Tu Logo.', // Agregamos el punto para el estilo corporativo
   theme: {
-    primaryColor: '#E58411', // El naranja del nuevo template
-    secondaryColor: '#1e293b',
+    primaryColor: '#2563EB', // Azul corporativo (Slate/Tailwind Blue)
+    secondaryColor: '#0F172A', // Fondo oscuro Slate
   },
   hero: {
-    // Podés actualizar los textos acá también si querés que sean dinámicos
-    title: 'Transformá tu casa en tu lugar favorito.',
-    subtitle: 'Muebles de autor con envíos a todo el país. Visitá nuestro showroom o comprá online.',
-    buttonText: 'Agendar visita al Showroom',
+    title: 'Protegemos tu patrimonio y optimizamos tus impuestos',
+    subtitle: 'Asesoramiento contable y jurídico integral para empresas y profesionales. Decisiones estratégicas con respaldo legal.',
+    buttonText: 'Consultar ahora',
     images: {
-      desktop: '/assets-t2/hero-desktop.webp', // <-- ACÁ ESTÁ LA MAGIA
-      tablet: '/assets-t2/hero-tablet.webp',   // <-- ACÁ ESTÁ LA MAGIA
-      mobile: '/assets-t2/hero-mobile.webp',   // <-- ACÁ ESTÁ LA MAGIA
+      desktop: '/assets-t3/hero-desktop.webp',
+      tablet: '/assets-t3/hero-tablet.webp',
+      mobile: '/assets-t3/hero-mobile.webp',
     },
   },
+  // =========================================================================
+  // LAS SIGUIENTES SECCIONES MANTIENEN LA DATA DEL TEMPLATE ANTERIOR POR AHORA
+  // Las iremos actualizando a medida que avancemos con los diseños del T3.
+  // =========================================================================
   about: {
     title: '¿Por qué elegir nuestra cocina?',
     subtitle: 'Sabor artesanal en cada bocado. Cuidamos cada detalle, desde la cocción hasta el empaque, para que comer rico sea una experiencia de todos los días.',
@@ -123,10 +126,10 @@ export const clientConfig: ClientData = {
     ]
   },
   location: {
-    title: 'Nuestro Local.\n¿Dónde Encontrarnos?',
-    description: '¿Preferís pasar a buscar tu pedido (Take Away) o comer al paso? Te esperamos en nuestro local con la mejor onda y la comida recién salida de la plancha. Vení a conocernos.',
-    buttonText: 'Hacer pedido para retirar',
-    mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52481.33230328221!2d-58.620025736195614!3d-34.69833598711422!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcc638a192fc4b%3A0xc3b869408b067a99!2sIsidro%20Casanova%2C%20Provincia%20de%20Buenos%20Aires!5e0!3m2!1ses-419!2sar!4v1714000000000!5m2!1ses-419!2sar'
+    title: 'Nuestras Oficinas.\n¿Dónde Encontrarnos?',
+    description: 'Te esperamos en nuestras oficinas para brindarte el mejor asesoramiento presencial. Vení a conocernos y tomemos un café mientras analizamos la situación fiscal y legal de tu empresa.',
+    buttonText: 'Agendar reunión presencial',
+    mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52481.5654067098!2d-58.66579295!3d-34.7042079!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcc63640bfa095%3A0xc665181da2da365!2sRafael%20Castillo%2C%20Provincia%20de%20Buenos%20Aires!5e0!3m2!1ses!2sar!4v1700000000000!5m2!1ses!2sar'
   },
   contact: {
     whatsapp: '5491100000000',
