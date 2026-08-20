@@ -1,10 +1,10 @@
 import type { ClientData } from '../types/index';
 
 export const clientConfig: ClientData = {
-  templateId: 'template-4', // Activamos el Template 4
+  templateId: import.meta.env.VITE_TEMPLATE_ID || 'template-1',
   businessName: 'Tu Logo',
   theme: {
-    primaryColor: '#059669', // Emerald 600
+    primaryColor: '#059669', 
     secondaryColor: '#f8fafc', 
   },
   hero: {
@@ -17,7 +17,6 @@ export const clientConfig: ClientData = {
       mobile: '/assets-t4/hero-t4.webp',
     },
   },
-  // Mantenemos el resto vacío o con datos anteriores, los actualizaremos luego
   about: { title: '', subtitle: '', description: '', images: { desktop: '', tablet: '', mobile: '' } },
   menu: { title: '', categories: [], items: [] },
   stats: { title: '', items: [] },
