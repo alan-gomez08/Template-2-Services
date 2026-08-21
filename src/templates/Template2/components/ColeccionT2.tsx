@@ -7,11 +7,9 @@ interface Props {
 }
 
 export default function ColeccionT2({ data }: Props) {
-  // Ahora la categoría inicial se lee dinámicamente de la primera que tengas configurada
   const [activeCategory, setActiveCategory] = useState(data.menu.categories[0] || 'Sillones');
   const sliderRef = useRef<HTMLDivElement>(null);
 
-  // Filtramos los productos según la categoría seleccionada
   const filteredItems = data.menu.items.filter(item => item.category === activeCategory);
 
   useEffect(() => {
@@ -20,8 +18,9 @@ export default function ColeccionT2({ data }: Props) {
     }
   }, [activeCategory]);
 
-  const scrollLeft = () => { if (sliderRef.current) sliderRef.current.scrollLeft -= 320; };
-  const scrollRight = () => { if (sliderRef.current) sliderRef.current.scrollLeft += 320; };
+  // Ajustamos el salto del scroll para que mueva casi 4 tarjetas de golpe en desktop
+  const scrollLeft = () => { if (sliderRef.current) sliderRef.current.scrollLeft -= 340; };
+  const scrollRight = () => { if (sliderRef.current) sliderRef.current.scrollLeft += 340; };
 
   return (
     <section id="coleccion" className="w-full bg-white py-[60px] lg:py-[100px] flex justify-center">
@@ -52,15 +51,22 @@ export default function ColeccionT2({ data }: Props) {
         </ScrollReveal>
 
         <div className="w-full flex flex-col items-center">
-          <div className="w-full">
+          {/* Contenedor principal ajustado con padding lateral */}
+          <div className="w-full max-w-[1320px] mx-auto px-4 lg:px-8">
+            
+            {/* Pista del slider: Ahora es 100% Flexbox horizontal infinito */}
             <div 
               ref={sliderRef}
-              className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 justify-start items-stretch overflow-x-auto md:overflow-visible snap-x snap-mandatory scroll-smooth px-6 scroll-pl-6 lg:px-20 lg:scroll-pl-20 pb-8 md:pb-0 hide-scrollbar"
+              className="flex gap-4 md:gap-6 justify-start items-stretch overflow-x-auto snap-x snap-mandatory scroll-smooth pb-8 hide-scrollbar w-full"
             >
               {filteredItems.map((item) => (
                 <article 
                   key={item.id} 
-                  className="shrink-0 flex-none w-[280px] sm:w-[320px] md:w-auto snap-start bg-white rounded-[16px] p-4 flex flex-col gap-4 shadow-[0px_10px_30px_rgba(0,0,0,0.06)] border border-black/5 hover:shadow-[0px_15px_40px_rgba(0,0,0,0.1)] transition-shadow"
+                  // MAGIA ACÁ: 
+                  // w-[280px] en celular
+                  // w-[calc(50%-12px)] en tablet (entran 2 justos)
+                  // w-[calc(25%-18px)] en desktop (entran 4 justos)
+                  className="shrink-0 flex-none w-[280px] md:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] snap-start bg-white rounded-[16px] p-4 flex flex-col gap-4 shadow-[0px_10px_30px_rgba(0,0,0,0.06)] border border-black/5 hover:shadow-[0px_15px_40px_rgba(0,0,0,0.1)] transition-shadow"
                 >
                   <div className="w-full aspect-square bg-[#F4F2EE] rounded-[10px] overflow-hidden flex items-center justify-center p-4">
                     {item.imagePath ? (
@@ -75,9 +81,8 @@ export default function ColeccionT2({ data }: Props) {
                   
                   <div className="flex flex-col gap-1 px-1 flex-grow">
                     <span className="text-[#1E1D1B]/50 text-[13px] font-medium font-['Inter'] uppercase tracking-wider">{item.category}</span>
-                    <h3 className="text-[#1E1D1B] text-[18px] lg:text-[20px] font-bold font-['Manrope'] leading-tight">{item.title}</h3>
+                    <h3 className="text-[#1E1D1B] text-[18px] lg:text-[20px] font-bold font-['Manrope'] leading-tight truncate">{item.title}</h3>
                     <div className="flex gap-1 mt-1">
-                      {/* Generamos 5 estrellas fijas visualmente como en tu diseño */}
                       {[...Array(5)].map((_, i) => (
                         <svg key={i} className="w-[14px] h-[14px] text-[#F6B76F]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
                       ))}
@@ -99,7 +104,8 @@ export default function ColeccionT2({ data }: Props) {
             </div>
           </div>
 
-          <div className="flex md:hidden justify-center items-center gap-6 mt-8">
+          {/* Las flechitas ahora están siempre visibles y centradas abajo */}
+          <div className="flex justify-center items-center gap-6 mt-4">
             <button onClick={scrollLeft} className="w-12 h-12 flex items-center justify-center rounded-full bg-white border border-[#1E1D1B]/10 text-[#1E1D1B] hover:bg-gray-50 active:scale-90 shadow-sm transition-all"><svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg></button>
             <button onClick={scrollRight} className="w-12 h-12 flex items-center justify-center rounded-full bg-white border border-[#1E1D1B]/10 text-[#1E1D1B] hover:bg-gray-50 active:scale-90 shadow-sm transition-all"><svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg></button>
           </div>
