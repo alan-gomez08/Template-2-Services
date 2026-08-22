@@ -3,9 +3,10 @@ import type { ClientData } from '../../../types';
 
 interface Props {
   data: ClientData;
+  paleta: any;
 }
 
-export default function NavbarT4({ data }: Props) {
+export default function NavbarT4({ data, paleta }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -22,43 +23,45 @@ export default function NavbarT4({ data }: Props) {
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'py-4 bg-white/95 backdrop-blur-md shadow-sm' : 'py-6 bg-transparent lg:bg-transparent bg-white'}`}>
+    <nav 
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'py-4 backdrop-blur-md shadow-sm' : 'py-6 bg-transparent lg:bg-transparent'}`}
+      style={{ backgroundColor: scrolled ? `${paleta.fondoPrincipal}F2` : paleta.fondoPrincipal }}
+    >
       <div className="max-w-[1280px] mx-auto px-6 lg:px-8 flex items-center justify-between">
         
-        {/* Logo */}
-        <a href="#inicio" className="text-[#059669] text-[20px] lg:text-[24px] font-bold font-['Arimo'] uppercase tracking-wide relative z-10">
+        <a href="#inicio" className="text-[20px] lg:text-[24px] font-bold font-['Arimo'] uppercase tracking-wide relative z-10" style={{ color: paleta.colorPrimario }}>
           {data.businessName}
         </a>
 
-        {/* Links Desktop */}
         <div className="hidden lg:flex items-center gap-10">
           {navLinks.map((link) => (
             <a 
               key={link.name} 
               href={link.href} 
-              className="text-slate-700 text-[16px] font-medium font-['Inter'] hover:text-[#059669] transition-colors"
+              className="text-[16px] font-medium font-['Inter'] transition-colors"
+              style={{ color: paleta.textoPrimario }}
+              onMouseEnter={(e) => e.currentTarget.style.color = paleta.colorPrimario}
+              onMouseLeave={(e) => e.currentTarget.style.color = paleta.textoPrimario}
             >
               {link.name}
             </a>
           ))}
         </div>
 
-        {/* Menú Hamburguesa Mobile */}
         <button 
           onClick={() => setIsOpen(!isOpen)}
           className="lg:hidden w-10 h-10 flex flex-col justify-center items-end gap-1.5 relative z-10"
         >
-          <div className="w-[24px] h-[2.5px] bg-slate-800 rounded-full transition-transform" />
-          <div className="w-[24px] h-[2.5px] bg-slate-800 rounded-full transition-transform" />
-          <div className="w-[24px] h-[2.5px] bg-slate-800 rounded-full transition-transform" />
+          <div className="w-[24px] h-[2.5px] rounded-full transition-transform" style={{ backgroundColor: paleta.textoPrimario }} />
+          <div className="w-[24px] h-[2.5px] rounded-full transition-transform" style={{ backgroundColor: paleta.textoPrimario }} />
+          <div className="w-[24px] h-[2.5px] rounded-full transition-transform" style={{ backgroundColor: paleta.textoPrimario }} />
         </button>
       </div>
 
-      {/* Menú Desplegable Mobile */}
       {isOpen && (
-        <div className="absolute top-full left-0 w-full bg-white border-t border-gray-100 py-6 flex flex-col items-center gap-6 lg:hidden shadow-xl">
+        <div className="absolute top-full left-0 w-full border-t py-6 flex flex-col items-center gap-6 lg:hidden shadow-xl" style={{ backgroundColor: paleta.fondoPrincipal, borderColor: `${paleta.textoPrimario}1A` }}>
           {navLinks.map((link) => (
-            <a key={link.name} href={link.href} onClick={() => setIsOpen(false)} className="text-slate-800 text-lg font-bold font-['Inter']">
+            <a key={link.name} href={link.href} onClick={() => setIsOpen(false)} className="text-lg font-bold font-['Inter']" style={{ color: paleta.textoPrimario }}>
               {link.name}
             </a>
           ))}
