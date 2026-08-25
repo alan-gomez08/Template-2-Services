@@ -10,11 +10,11 @@ export default function Template4() {
 
   // 🎨 TABLERO DE COLORES T4 🎨
   const paleta = {
-    fondoPrincipal: configT4?.identidad?.colorSecundario || "#FFFFFF", // Blanco limpio general
+    fondoPrincipal: configT4?.theme?.secondaryColor || "#FFFFFF", // Blanco limpio general
     fondoGradienteInicio: "#ECFDF5", // emerald-50 (Para el hero y cards)
     fondoGradienteFin: "#F0FDFA",    // teal-50
     fondoFooter: "#111827",          // gray-900 (Footer oscuro)
-    colorPrimario: configT4?.identidad?.colorPrincipal || "#059669", // Verde Esmeralda
+    colorPrimario: configT4?.theme?.primaryColor || "#059669", // Verde Esmeralda
     colorSecundario: "#10B981",      // Variante de verde para gradientes
     textoPrimario: "#1E293B",        // slate-800
     textoSecundario: "#64748B",      // slate-500

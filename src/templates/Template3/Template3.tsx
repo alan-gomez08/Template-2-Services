@@ -15,7 +15,7 @@ export default function Template3() {
     fondoOscuroSecundario: "#101828",// Fondo del Footer
     fondoClaro: "#F8FAFC",           // Fondo de secciones claras (Servicios, Equipo)
     fondoCajas: "#FFFFFF",           // Fondo de las tarjetas blancas
-    colorPrimario: configT3?.identidad?.colorPrincipal || "#2563EB", // Azul corporativo (Botones, Íconos)
+    colorPrimario: configT3?.theme?.primaryColor || "#2563EB", // Azul corporativo (Botones, Íconos)
     textoClaro: "#F5F5F5",           // Textos sobre fondo oscuro
     textoOscuro: "#0F172A",          // Títulos sobre fondo claro
     textoGris: "#475569",            // Párrafos sobre fondo claro
