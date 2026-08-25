@@ -1,4 +1,5 @@
-// src/templates/Template1/index.tsx
+import { useState } from 'react';
+
 import NavbarT1 from './components/NavbarT1';
 import HeroT1 from './components/HeroT1';
 import NosotrosT1 from './components/NosotrosT1';
@@ -7,11 +8,39 @@ import StatsT1 from './components/StatsT1';
 import TestimonialsT1 from './components/TestimonialsT1';
 import LocationT1 from './components/LocationT1';
 import FooterT1 from './components/FooterT1';
+import CartDrawer from './components/CartDrawer'; // <-- Importamos nuestro nuevo cajón
 
 import { configT1 } from '../../config/dataT1'; 
 
 export default function Template1() {
   
+  // ESTADO GLOBAL DEL CARRITO
+  const [cart, setCart] = useState<any[]>([]);
+
+  // Función mágica para sumar productos
+  const addToCart = (product: any) => {
+    setCart(prevCart => {
+      const existingProduct = prevCart.find(item => item.id === product.id);
+      if (existingProduct) {
+        return prevCart.map(item => item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item);
+      }
+      return [...prevCart, { ...product, quantity: 1 }];
+    });
+  };
+
+  // Función para restar o sumar cantidades desde el drawer
+  const updateQuantity = (id: string, amount: number) => {
+    setCart(prevCart => {
+      return prevCart.map(item => {
+        if (item.id === id) {
+          const newQuantity = item.quantity + amount;
+          return newQuantity > 0 ? { ...item, quantity: newQuantity } : null; // Si llega a 0 se elimina
+        }
+        return item;
+      }).filter(item => item !== null); // Filtramos los nulos (eliminados)
+    });
+  };
+
   const paleta = {
     fondoPrincipal: configT1?.identidad?.colorSecundario || "#000000",
     fondoSecundario: "#111111",
@@ -25,17 +54,23 @@ export default function Template1() {
 
   return (
     <main 
-      className="w-full max-w-[100vw] min-h-screen font-sans overflow-x-hidden"
+      className="w-full max-w-[100vw] min-h-screen font-sans overflow-x-hidden relative"
       style={{ backgroundColor: paleta.fondoPrincipal }}
     >
       <NavbarT1 data={configT1} paleta={paleta} />
       <HeroT1 data={configT1} paleta={paleta} />
       <NosotrosT1 data={configT1} paleta={paleta} />
-      <MenuT1 data={configT1} paleta={paleta} />
+      
+      {/* Le pasamos al Menú la función de agregar al carrito */}
+      <MenuT1 data={configT1} paleta={paleta} addToCart={addToCart} />
+      
       <StatsT1 data={configT1} paleta={paleta} />
       <TestimonialsT1 data={configT1} paleta={paleta} />
       <LocationT1 data={configT1} paleta={paleta} />
       <FooterT1 data={configT1} paleta={paleta} />
+
+      {/* Renderizamos el Checkout Inteligente */}
+      <CartDrawer data={configT1} paleta={paleta} cart={cart} updateQuantity={updateQuantity} />
     </main>
   );
 }
