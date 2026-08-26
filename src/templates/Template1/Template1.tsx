@@ -8,7 +8,7 @@ import StatsT1 from './components/StatsT1';
 import TestimonialsT1 from './components/TestimonialsT1';
 import LocationT1 from './components/LocationT1';
 import FooterT1 from './components/FooterT1';
-import CartDrawer from './components/CartDrawer'; // <-- Importamos nuestro nuevo cajón
+import CartDrawer from './components/CartDrawer'; 
 
 import { configT1 } from '../../config/dataT1'; 
 
@@ -17,7 +17,7 @@ export default function Template1() {
   // ESTADO GLOBAL DEL CARRITO
   const [cart, setCart] = useState<any[]>([]);
 
-  // Función mágica para sumar productos
+  // Función para sumar productos
   const addToCart = (product: any) => {
     setCart(prevCart => {
       const existingProduct = prevCart.find(item => item.id === product.id);
@@ -28,16 +28,16 @@ export default function Template1() {
     });
   };
 
-  // Función para restar o sumar cantidades desde el drawer
+  // Función para sumar o restar cantidades desde el menú o el drawer
   const updateQuantity = (id: string, amount: number) => {
     setCart(prevCart => {
       return prevCart.map(item => {
         if (item.id === id) {
           const newQuantity = item.quantity + amount;
-          return newQuantity > 0 ? { ...item, quantity: newQuantity } : null; // Si llega a 0 se elimina
+          return newQuantity > 0 ? { ...item, quantity: newQuantity } : null; 
         }
         return item;
-      }).filter(item => item !== null); // Filtramos los nulos (eliminados)
+      }).filter(item => item !== null); 
     });
   };
 
@@ -61,15 +61,15 @@ export default function Template1() {
       <HeroT1 data={configT1} paleta={paleta} />
       <NosotrosT1 data={configT1} paleta={paleta} />
       
-      {/* Le pasamos al Menú la función de agregar al carrito */}
-      <MenuT1 data={configT1} paleta={paleta} addToCart={addToCart} />
+      {/* Le pasamos el carrito y las funciones de control al Menú */}
+      <MenuT1 data={configT1} paleta={paleta} cart={cart} addToCart={addToCart} updateQuantity={updateQuantity} />
       
       <StatsT1 data={configT1} paleta={paleta} />
       <TestimonialsT1 data={configT1} paleta={paleta} />
       <LocationT1 data={configT1} paleta={paleta} />
       <FooterT1 data={configT1} paleta={paleta} />
 
-      {/* Renderizamos el Checkout Inteligente */}
+      {/* Checkout Inteligente */}
       <CartDrawer data={configT1} paleta={paleta} cart={cart} updateQuantity={updateQuantity} />
     </main>
   );

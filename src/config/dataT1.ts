@@ -6,7 +6,8 @@ export const configT1: any = {
   theme: { primaryColor: '#ffffff', secondaryColor: '#111827' },
   
   config: {
-    ecommerceMode: true, 
+    ecommerceMode: true, // Mantiene el carrito encendido
+    mostrarPrecios: false, // 👇 AGREGÁS ESTO PARA OCULTAR LOS PRECIOS
     deliveryMethod: 'ambos', 
     deliveryZones: ['Ramos Mejía', 'San Justo', 'Villa Luzuriaga', 'Haedo'], 
   },
