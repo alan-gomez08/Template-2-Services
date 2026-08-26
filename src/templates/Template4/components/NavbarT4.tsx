@@ -24,12 +24,16 @@ export default function NavbarT4({ data, paleta }: Props) {
 
   return (
     <nav 
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'py-4 backdrop-blur-md shadow-sm' : 'py-6 bg-transparent lg:bg-transparent'}`}
-      style={{ backgroundColor: scrolled ? `${paleta.fondoPrincipal}F2` : paleta.fondoPrincipal }}
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'py-4 backdrop-blur-md shadow-sm' : 'py-6'}`}
+      style={{ 
+        // 👇 ACÁ ESTÁ LA MAGIA: Transparente arriba, fondoPrincipal al scrollear
+        backgroundColor: scrolled ? `${paleta.fondoPrincipal}F2` : 'transparent',
+        borderBottom: scrolled ? `1px solid ${paleta.textoSecundario}15` : '1px solid transparent'
+      }}
     >
       <div className="max-w-[1280px] mx-auto px-6 lg:px-8 flex items-center justify-between">
         
-        <a href="#inicio" className="text-[20px] lg:text-[24px] font-bold font-['Arimo'] uppercase tracking-wide relative z-10" style={{ color: paleta.colorPrimario }}>
+        <a href="#inicio" className="text-[20px] lg:text-[24px] font-black tracking-tight relative z-10" style={{ color: paleta.colorPrimario }}>
           {data.businessName}
         </a>
 
@@ -38,7 +42,7 @@ export default function NavbarT4({ data, paleta }: Props) {
             <a 
               key={link.name} 
               href={link.href} 
-              className="text-[16px] font-medium font-['Inter'] transition-colors"
+              className="text-[15px] font-semibold transition-colors"
               style={{ color: paleta.textoPrimario }}
               onMouseEnter={(e) => e.currentTarget.style.color = paleta.colorPrimario}
               onMouseLeave={(e) => e.currentTarget.style.color = paleta.textoPrimario}
@@ -58,10 +62,11 @@ export default function NavbarT4({ data, paleta }: Props) {
         </button>
       </div>
 
+      {/* MENÚ MÓVIL */}
       {isOpen && (
-        <div className="absolute top-full left-0 w-full border-t py-6 flex flex-col items-center gap-6 lg:hidden shadow-xl" style={{ backgroundColor: paleta.fondoPrincipal, borderColor: `${paleta.textoPrimario}1A` }}>
+        <div className="absolute top-full left-0 w-full border-t py-6 flex flex-col items-center gap-6 lg:hidden shadow-xl" style={{ backgroundColor: paleta.fondoPrincipal, borderColor: `${paleta.textoSecundario}22` }}>
           {navLinks.map((link) => (
-            <a key={link.name} href={link.href} onClick={() => setIsOpen(false)} className="text-lg font-bold font-['Inter']" style={{ color: paleta.textoPrimario }}>
+            <a key={link.name} href={link.href} onClick={() => setIsOpen(false)} className="text-lg font-bold" style={{ color: paleta.textoPrimario }}>
               {link.name}
             </a>
           ))}

@@ -1,10 +1,6 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-interface Props {
-  children: ReactNode;
-}
-
-export default function ScrollReveal({ children }: Props) {
+export default function ScrollReveal({ children, className = '' }: any) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -13,13 +9,10 @@ export default function ScrollReveal({ children }: Props) {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          observer.unobserve(entry.target);
+          observer.disconnect(); // Deja de observar una vez que ya apareció
         }
       },
-      {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-      }
+      { threshold: 0.1 } // Se activa cuando el 10% del elemento es visible
     );
 
     if (ref.current) {
@@ -32,11 +25,9 @@ export default function ScrollReveal({ children }: Props) {
   return (
     <div
       ref={ref}
-      className={`transition-all duration-1200 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] transform ${
-        isVisible 
-          ? 'opacity-100 translate-y-0 scale-100 blur-none' 
-          : 'opacity-0 translate-y-16 scale-95 blur-[6px]'
-      }`}
+      className={`transition-all duration-1000 ease-out ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+      } ${className}`}
     >
       {children}
     </div>

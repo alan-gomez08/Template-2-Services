@@ -9,16 +9,17 @@ import FooterT4 from './components/FooterT4';
 export default function Template4() {
 
   // 🎨 TABLERO DE COLORES T4 🎨
+// 🎨 TABLERO DE COLORES T4 (Estilo Profesional / Servicios) 🎨
   const paleta = {
-    fondoPrincipal: configT4?.theme?.secondaryColor || "#FFFFFF", // Blanco limpio general
-    fondoGradienteInicio: "#ECFDF5", // emerald-50 (Para el hero y cards)
-    fondoGradienteFin: "#F0FDFA",    // teal-50
-    fondoFooter: "#111827",          // gray-900 (Footer oscuro)
-    colorPrimario: configT4?.theme?.primaryColor || "#059669", // Verde Esmeralda
-    colorSecundario: "#10B981",      // Variante de verde para gradientes
-    textoPrimario: "#1E293B",        // slate-800
-    textoSecundario: "#64748B",      // slate-500
-    textoClaro: "#FFFFFF",           // Blanco para botones y footer
+    fondoPrincipal: configT4?.theme?.secondaryColor || "#FFFFFF", // Fondo blanco limpio general
+    fondoGradienteInicio: "#ECFDF5", // Fondo verde súper suave (Para el Hero y fondos alternados)
+    fondoGradienteFin: "#F0FDFA",    // Transición sutil del gradiente
+    fondoFooter: "#111827",          // Azul/Gris muy oscuro para el footer
+    colorPrimario: configT4?.theme?.primaryColor || "#059669", // Verde Esmeralda vibrante (Botones, íconos y banners de CTA)
+    colorSecundario: "#10B981",      // Verde un tono más claro (Ideal para hover en botones)
+    textoPrimario: "#1E293B",        // Gris oscuro (Para títulos principales)
+    textoSecundario: "#64748B",      // Gris medio (Para párrafos y descripciones)
+    textoClaro: "#FFFFFF",           // Texto blanco (Para contrastar sobre botones verdes y el footer oscuro)
   };
 
   return (

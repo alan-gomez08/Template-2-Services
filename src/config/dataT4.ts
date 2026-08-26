@@ -3,7 +3,7 @@ import type { ClientData } from '../types/index';
 export const configT4: ClientData = {
   templateId: 'template-4',
   businessName: 'Tu Logo',
-  theme: { primaryColor: '#059669', secondaryColor: '#10B981' },
+  theme: { primaryColor: '#059669', secondaryColor: '#F8FAFC' },
   
   hero: { 
     title: 'Eliminación Profesional de Moho', 

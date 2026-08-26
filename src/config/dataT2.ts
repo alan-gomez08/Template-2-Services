@@ -6,7 +6,7 @@ export const configT2: any = {
   
   // --- EL INTERRUPTOR MAESTRO ---
   config: {
-    modulo: 'turnos', // Cambialo a 'turnos' para ver cómo muta el template a servicios
+    modulo: 'catalogo', // Cambialo a 'turnos' para ver cómo muta el template a servicios
     mostrarPrecios: true, // Si es false, oculta los precios y pide cotización por WhatsApp
     agendaModo: 'whatsapp', // 'whatsapp' | 'link' (Solo aplica si modulo es 'turnos')
     agendaLink: 'https://calendly.com/tu-usuario', // Link externo

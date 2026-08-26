@@ -7,7 +7,7 @@ export const configT1: any = {
   
   config: {
     ecommerceMode: true, // Mantiene el carrito encendido
-    mostrarPrecios: false, // 👇 AGREGÁS ESTO PARA OCULTAR LOS PRECIOS
+    mostrarPrecios: true, // 👇 AGREGÁS ESTO PARA OCULTAR LOS PRECIOS
     deliveryMethod: 'ambos', 
     deliveryZones: ['Ramos Mejía', 'San Justo', 'Villa Luzuriaga', 'Haedo'], 
   },
