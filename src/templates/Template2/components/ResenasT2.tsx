@@ -10,32 +10,7 @@ interface Props {
 export default function ResenasT2({ data, paleta }: Props) {
   const sliderRef = useRef<HTMLDivElement>(null);
 
-  const reviews = [
-    {
-      id: 1,
-      name: 'Federico G.',
-      location: 'Castelar',
-      text: '"Estábamos buscando renovar el comedor y nos ayudaron un montón con las medidas. Las sillas llegaron impecables y en la fecha que nos prometieron."',
-      avatar: '/assets-t2/avatar-federico.webp',
-      bgImage: '/assets-t2/review-bg-1.webp',
-    },
-    {
-      id: 2,
-      name: 'Sofía',
-      location: 'Ramos Mejía',
-      text: '"Compré la Poltrona Roma y superó mis expectativas. Nos asesoraron excelente con el color de la tela por WhatsApp para que combine con mi living. Muy recomendables."',
-      avatar: '/assets-t2/avatar-sofia.webp',
-      bgImage: '/assets-t2/review-bg-2.webp',
-    },
-    {
-      id: 3,
-      name: 'Martina L.',
-      location: 'Ramos Mejía',
-      text: '"Nos queda cerca el showroom, así que fuimos a probar los sillones en persona. Terminamos encargando todo el juego de living. Excelente calidad de terminaciones."',
-      avatar: '/assets-t2/avatar-martina.webp',
-      bgImage: '/assets-t2/review-bg-3.webp',
-    }
-  ];
+  if (!data?.testimonials?.items || data.testimonials.items.length === 0) return null;
 
   const scrollLeft = () => { if (sliderRef.current) sliderRef.current.scrollLeft -= 350; };
   const scrollRight = () => { if (sliderRef.current) sliderRef.current.scrollLeft += 350; };
@@ -50,7 +25,7 @@ export default function ResenasT2({ data, paleta }: Props) {
               Reseñas
             </span>
             <h2 className="text-[30px] md:text-[36px] lg:text-[42px] font-semibold font-['Manrope'] leading-tight text-center" style={{ color: paleta.textoPrimario }}>
-              Historias de casas reales
+              {data.testimonials.title}
             </h2>
           </div>
         </ScrollReveal>
@@ -61,19 +36,28 @@ export default function ResenasT2({ data, paleta }: Props) {
           </button>
 
           <div ref={sliderRef} className="w-full flex gap-6 lg:gap-8 overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar px-6 lg:px-[120px] pb-12 pt-4">
-            {reviews.map((review) => (
-              <div key={review.id} className="relative shrink-0 snap-center w-[300px] md:w-[370px] flex flex-col rounded-[20px] shadow-[0_15px_40px_-10px_rgba(0,0,0,0.1)] hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.15)] border transition-shadow duration-300" style={{ backgroundColor: paleta.fondoCajas, borderColor: `${paleta.textoPrimario}0D` }}>
-                <div className="w-full h-[230px] md:h-[280px] rounded-t-[20px] overflow-hidden">
-                  <img src={review.bgImage} alt={`Interior de ${review.name}`} className="w-full h-full object-cover" />
+            {data.testimonials.items.map((review: any, index: number) => (
+              <div key={index} className="relative shrink-0 snap-center w-[300px] md:w-[370px] flex flex-col rounded-[20px] shadow-[0_15px_40px_-10px_rgba(0,0,0,0.1)] hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.15)] border transition-shadow duration-300" style={{ backgroundColor: paleta.fondoCajas, borderColor: `${paleta.textoPrimario}0D` }}>
+                
+                {/* IMAGEN DE FONDO */}
+                <div className="w-full h-[230px] md:h-[280px] rounded-t-[20px] overflow-hidden bg-gray-100">
+                  <img src={review.bgImage || `/assets-t2/review-bg-${(index % 3) + 1}.webp`} alt={`Interior de ${review.name}`} className="w-full h-full object-cover" />
                 </div>
+                
                 <div className="relative px-6 pb-10 pt-12 flex flex-col items-center">
-                  <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-[76px] h-[76px] rounded-full border-[4px] overflow-hidden shadow-md" style={{ borderColor: paleta.fondoCajas, backgroundColor: paleta.fondoCajas }}>
-                    <img src={review.avatar} alt={review.name} className="w-full h-full object-cover" />
+                  
+                  {/* AVATAR CIRCULAR O LETRA */}
+                  <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-[76px] h-[76px] rounded-full border-[4px] overflow-hidden shadow-md flex items-center justify-center text-[28px] font-bold" style={{ borderColor: paleta.fondoCajas, backgroundColor: paleta.colorAcento, color: paleta.textoClaro }}>
+                    {review.avatar ? (
+                      <img src={review.avatar} alt={review.name} className="w-full h-full object-cover" />
+                    ) : (
+                      review.name.charAt(0)
+                    )}
                   </div>
 
                   <h3 className="text-[18px] lg:text-[20px] font-bold font-['Manrope']" style={{ color: paleta.textoPrimario }}>{review.name}</h3>
-                  <span className="text-[12px] lg:text-[13px] font-medium font-['Manrope'] mb-4" style={{ color: `${paleta.textoPrimario}99` }}>{review.location}</span>
-                  <p className="text-[14px] lg:text-[15px] font-medium font-['Manrope'] text-center leading-[1.6] min-h-[100px]" style={{ color: `${paleta.textoPrimario}CC` }}>{review.text}</p>
+                  <span className="text-[12px] lg:text-[13px] font-medium font-['Manrope'] mb-4" style={{ color: `${paleta.textoPrimario}99` }}>{review.role}</span>
+                  <p className="text-[14px] lg:text-[15px] font-medium font-['Manrope'] text-center leading-[1.6] min-h-[100px]" style={{ color: `${paleta.textoPrimario}CC` }}>"{review.content}"</p>
 
                   <div className="flex gap-1.5 mt-6">
                     {[...Array(5)].map((_, i) => (
@@ -89,16 +73,6 @@ export default function ResenasT2({ data, paleta }: Props) {
             <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
           </button>
         </div>
-
-        <div className="flex lg:hidden justify-center items-center gap-6 mt-4">
-          <button onClick={scrollLeft} className="w-12 h-12 flex items-center justify-center rounded-full border shadow-sm hover:opacity-80 active:scale-90 transition-all" style={{ backgroundColor: paleta.fondoCajas, borderColor: `${paleta.textoPrimario}1A`, color: paleta.textoPrimario }}>
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
-          </button>
-          <button onClick={scrollRight} className="w-12 h-12 flex items-center justify-center rounded-full border shadow-sm hover:opacity-80 active:scale-90 transition-all" style={{ backgroundColor: paleta.fondoCajas, borderColor: `${paleta.textoPrimario}1A`, color: paleta.textoPrimario }}>
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-          </button>
-        </div>
-
       </div>
     </section>
   );

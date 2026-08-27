@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 export default function CartDrawerT2({ data, cart, updateQuantity, paleta }: any) {
   const [isOpen, setIsOpen] = useState(false);
 
-  // Si el módulo no es carrito, este componente directamente no existe
-  if (data?.config?.modulo !== 'carrito') return null;
+  // Si el módulo no es ni carrito ni catalogo, este componente directamente no existe
+  if (data?.config?.modulo !== 'carrito' && data?.config?.modulo !== 'catalogo') return null;
 
   const mostrarPrecios = data?.config?.mostrarPrecios !== false;
 
@@ -19,7 +19,6 @@ export default function CartDrawerT2({ data, cart, updateQuantity, paleta }: any
     let message = `*NUEVO PEDIDO / CONSULTA* 🛍️\n\n`;
     
     cart.forEach((item: any) => {
-      // Magia: Une el talle y color si existen
       const variantStr = [item.selectedTalle, item.selectedColor].filter(Boolean).join(', ');
       const titleWithVariant = variantStr ? `${item.title} (${variantStr})` : item.title;
       
@@ -36,7 +35,6 @@ export default function CartDrawerT2({ data, cart, updateQuantity, paleta }: any
     window.open(`https://wa.me/${data?.contact?.whatsapp || ''}?text=${encodedMessage}`, '_blank');
   };
 
-  // Prevenir scroll en body
   useEffect(() => {
     if (isOpen) document.body.style.overflow = 'hidden';
     else document.body.style.overflow = 'auto';
@@ -47,7 +45,6 @@ export default function CartDrawerT2({ data, cart, updateQuantity, paleta }: any
 
   return (
     <>
-      {/* BOTÓN FLOTANTE */}
       <button 
         onClick={() => setIsOpen(true)}
         className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-40 p-4 md:p-5 rounded-full shadow-2xl flex items-center justify-center transition-transform hover:scale-110 animate-bounce border-2"
@@ -59,7 +56,6 @@ export default function CartDrawerT2({ data, cart, updateQuantity, paleta }: any
         </span>
       </button>
 
-      {/* DRAWER LATERAL / MODAL */}
       {isOpen && (
         <div className="fixed inset-0 z-[100] flex justify-end">
           <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setIsOpen(false)} />
@@ -68,7 +64,6 @@ export default function CartDrawerT2({ data, cart, updateQuantity, paleta }: any
             className="relative w-full max-w-md h-[100dvh] shadow-2xl flex flex-col animate-slide-in-right rounded-l-[32px] md:rounded-l-[40px] border-l"
             style={{ backgroundColor: paleta.fondoSecundario, borderColor: `${paleta.textoSecundario}22` }}
           >
-            {/* CABECERA */}
             <div className="p-6 md:p-8 border-b flex justify-between items-center" style={{ borderColor: `${paleta.textoSecundario}22` }}>
               <h2 className="text-3xl font-black font-['Manrope']" style={{ color: paleta.textoPrimario }}>Tu Bolsa</h2>
               <button onClick={() => setIsOpen(false)} className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-black/5 transition-colors" style={{ color: paleta.textoPrimario }}>
@@ -76,7 +71,6 @@ export default function CartDrawerT2({ data, cart, updateQuantity, paleta }: any
               </button>
             </div>
 
-            {/* LISTA DE ITEMS */}
             <div className="flex-grow overflow-y-auto p-6 flex flex-col gap-6 hide-scrollbar">
               {cart.map((item: any) => (
                 <div key={item.cartId} className="flex gap-4 p-3 rounded-[24px] bg-black/5 hover:bg-black/10 transition-colors">
@@ -89,7 +83,6 @@ export default function CartDrawerT2({ data, cart, updateQuantity, paleta }: any
                   <div className="flex flex-col flex-grow justify-center pr-2">
                     <span className="font-bold text-md leading-tight" style={{ color: paleta.textoPrimario }}>{item.title}</span>
                     
-                    {/* MOSTRAMOS VARIANTES EN EL CARRITO */}
                     {(item.selectedTalle || item.selectedColor) && (
                       <span className="text-xs font-bold mt-1 uppercase opacity-70" style={{ color: paleta.textoPrimario }}>
                         {item.selectedTalle} {item.selectedColor ? `| ${item.selectedColor}` : ''}
@@ -99,7 +92,6 @@ export default function CartDrawerT2({ data, cart, updateQuantity, paleta }: any
                     <div className="flex justify-between items-end mt-3">
                       <span className="font-black text-lg" style={{ color: paleta.colorPrimario }}>{mostrarPrecios ? item.price : ''}</span>
                       
-                      {/* CONTROLES */}
                       <div className="flex items-center gap-3 rounded-full p-1 border" style={{ backgroundColor: paleta.fondoCajas, borderColor: `${paleta.textoSecundario}33` }}>
                         <button onClick={() => updateQuantity(item.cartId, -1)} className="w-7 h-7 flex items-center justify-center rounded-full bg-black/5 hover:bg-black/10 transition-colors font-black text-lg leading-none" style={{ color: paleta.textoPrimario }}>-</button>
                         <span className="font-black text-sm w-4 text-center" style={{ color: paleta.textoPrimario }}>{item.quantity}</span>
@@ -111,7 +103,6 @@ export default function CartDrawerT2({ data, cart, updateQuantity, paleta }: any
               ))}
             </div>
 
-            {/* CHECKOUT LÓGISTICA Y TOTAL */}
             <div className="p-6 md:p-8 flex flex-col gap-4 shadow-[0_-10px_40px_rgba(0,0,0,0.1)] z-10" style={{ backgroundColor: paleta.fondoCajas }}>
               {mostrarPrecios && (
                 <div className="flex justify-between items-center mb-2 border-b pb-4" style={{ borderColor: `${paleta.textoSecundario}22` }}>

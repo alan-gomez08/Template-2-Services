@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { configT2 } from '../../config/dataT2'; 
+import { configT2 } from '../../config/dataT2.ts'; 
 import NavbarT2 from './components/NavbarT2';
 import HeroT2 from './components/HeroT2';
 import NosotrosT2 from './components/NosotrosT2';

@@ -31,7 +31,7 @@ export default function NavbarT2({ data, paleta }: Props) {
       <div className="max-w-[1440px] mx-auto px-6 lg:px-20 flex items-center justify-between relative">
         
         <a href="#inicio" className="text-[26px] lg:text-[28px] font-semibold font-['Manrope'] tracking-wide relative z-10 shrink-0" style={{ color: paleta.textoClaro }}>
-          Tu Logo
+          {data.businessName}
         </a>
 
         <div className="hidden lg:flex items-center gap-10 ml-auto">
