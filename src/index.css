@@ -1,120 +1,44 @@
-export interface ClientData {
-  templateId?: string;
-  businessName: string;
-  config?: {
-    modulo?: string;
-    mostrarPrecios?: boolean;
-    agendaModo?: string;
-    agendaLink?: string;
-    [key: string]: any;
-  };
-  theme: {
-    primaryColor: string;
-    secondaryColor: string;
-  };
-  nav?: {
-    links?: { name: string; href: string }[];
-    buttonText?: string;
-  };
-  hero: {
-    title: string;
-    subtitle: string;
-    buttonText: string;
-    buttonType?: string;
-    buttonUrl?: string;
-    images: {
-      desktop: string;
-      tablet: string;
-      mobile: string;
-    };
-  };
-  about: {
-    title: string;
-    subtitle: string;
-    description: string;
-    buttonText?: string;
-    buttonType?: string;
-    buttonUrl?: string;
-    images: {
-      desktop: string;
-      tablet: string;
-      mobile: string;
-    };
-  };
-  menu: {
-    title: string;
-    categories: string[];
-    items: {
-      id: string;
-      title: string;
-      description: string;
-      price: string;
-      imagePath: string;
-      category: string;
-      colores?: string[];
-      talles?: string[];
-    }[];
-  };
-  stats: {
-    title: string;
-    items: {
-      value: string;
-      label: string;
-    }[];
-  };
-  events: {
-    title: string;
-    description: string;
-    buttonText: string;
-    buttonType?: string;
-    buttonUrl?: string;
-    images?: string[];
-  };
-  faqs?: {
-    question: string;
-    answer: string;
-  }[];
-  cta?: {
-    title: string;
-    description: string;
-    buttonText: string;
-    buttonType?: string;
-    buttonUrl?: string;
-  };
-  testimonials: {
-    title: string;
-    items: {
-      id?: string;
-      name: string;
-      text?: string;
-      content?: string;
-      role?: string;
-      imagePath?: string;
-      avatar?: string;
-      bgImage?: string;
-      rating?: number;
-    }[];
-  };
-  location: {
-    title: string;
-    description: string;
-    buttonText: string;
-    buttonType?: string;
-    buttonUrl?: string;
-    mapEmbedUrl: string;
-  };
-  contact: {
-    whatsapp: string;
-    instagram: string;
-    facebook: string;
-  };
-  inspiracion?: {
-    title?: string;
-    subtitle?: string;
-    description?: string;
-    buttonText?: string;
-    buttonType?: string;
-    buttonUrl?: string;
-    images?: string[];
-  };
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Manrope:wght@500;600;700;800&display=swap');
+
+@import "tailwindcss";
+
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: relative;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Altura exacta de la Navbar */
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #000000;
+  color: #FFFFFF;
+}
+
+@keyframes fadeSlideUp {
+  0% { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  100% { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+.animate-menu-fade {
+  animation: fadeSlideUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
