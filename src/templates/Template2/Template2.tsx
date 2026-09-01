@@ -38,17 +38,17 @@ export default function Template2() {
     });
   };
 
-  // 🎨 TABLERO DE COLORES T2 🎨
-  const paleta = {
-    fondoPrincipal: "#FAF9F6",       // Fondo claro general
-    fondoOscuro: "#000000",          // Fondo de la portada y menús móviles
-    fondoCajas: "#FFFFFF",           // Fondo de tarjetas
-    fondoSecundario: "#EEEEEE",      // Fondo de tags o separadores
-    colorPrimario: "#E58411",        // Detalles llamativos (íconos, estrellas, links)
-    colorAcento: "#3A4B3A",          // Fondo de botones principales y footer (Ej: verde musgo)
-    textoPrimario: "#1E1D1B",        // Textos oscuros
-    textoClaro: "#FFFFFF",           // Textos sobre fondos oscuros
-  };
+// 🎨 TABLERO DE COLORES T2 (Estética Spa Orgánico) 🎨
+const paleta = {
+  fondoPrincipal: "#F9F7F3",       // Blanco arena muy sutil que relaja la vista
+  fondoOscuro: "#2A2E2C",          // Gris carbón verdoso (elimina la dureza del negro puro)
+  fondoCajas: "#FFFFFF",           // Blanco puro para darle limpieza y aire a las tarjetas
+  fondoSecundario: "#EAE7E0",      // "Greige" cálido, reemplaza al gris genérico #EEEEEE
+  colorPrimario: "#B58A61",        // Tono arcilla/terracota suave en lugar del naranja vibrante
+  colorAcento: "#4A5D4E",          // Verde salvia oscuro, orgánico y elegante para botones
+  textoPrimario: "#2C2A28",        // Gris oscuro cálido, mejora la legibilidad
+  textoClaro: "#FFFFFF",           // Blanco puro para contraste sobre fondos oscuros
+};
 
   return (
     <main 
