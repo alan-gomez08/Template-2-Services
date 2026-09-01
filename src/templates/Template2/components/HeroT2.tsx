@@ -19,10 +19,10 @@ export default function HeroT2({ data, paleta }: Props) {
   );
 
   return (
-    <section id="inicio" className="relative w-full" style={{ backgroundColor: paleta.fondoPrincipal }}>
+    <section id="inicio" className="relative w-full h-[100svh] min-h-[700px] overflow-hidden" style={{ backgroundColor: paleta.fondoOscuro }}>
       
       {/* VISTA DESKTOP & TABLET */}
-      <div className="hidden md:flex relative w-full h-[100svh] min-h-[750px] flex-col justify-start pt-[18vh] lg:pt-[22vh] items-center overflow-hidden" style={{ backgroundColor: paleta.fondoOscuro }}>
+      <div className="hidden md:flex relative w-full h-full flex-col justify-start pt-[18vh] lg:pt-[22vh] items-center">
         <picture className="absolute inset-0 w-full h-full">
           <source media="(min-width: 1024px)" srcSet={data.hero.images.desktop} />
           <img src={data.hero.images.tablet} alt="Hero Background" className="w-full h-full object-cover object-center" />
@@ -31,11 +31,9 @@ export default function HeroT2({ data, paleta }: Props) {
         <div className="absolute inset-0 bg-black/30 bg-gradient-to-b from-black/60 via-transparent to-black/60" />
 
         <div className="relative z-10 flex flex-col items-center text-center px-8">
-          {/* Sacamos text-balance y le dimos max-w-[1000px] para que ocupe todo el ancho en 2 líneas */}
           <h1 className="text-[48px] md:text-[60px] lg:text-[80px] font-bold font-['Manrope'] leading-[1.1] max-w-[1000px] mb-6 drop-shadow-2xl" style={{ color: paleta.textoClaro }}>
             {data.hero.title}
           </h1>
-          {/* Letra más chica (20px) y ancho de 850px para que calce perfecto en 2 líneas */}
           <p className="text-[17px] lg:text-[20px] font-medium font-['Manrope'] max-w-[850px] leading-relaxed mb-10 drop-shadow-lg" style={{ color: `${paleta.textoClaro}F2` }}>
             {data.hero.subtitle}
           </p>
@@ -51,7 +49,6 @@ export default function HeroT2({ data, paleta }: Props) {
               borderColor: isHovered ? paleta.colorPrimario : `${paleta.textoClaro}66` 
             }}
           >
-            {/* CAPA DE PINTURA (FILL) */}
             <div 
               className="absolute left-0 top-0 h-full transition-all duration-[400ms] ease-out z-0"
               style={{ 
@@ -59,11 +56,9 @@ export default function HeroT2({ data, paleta }: Props) {
                 backgroundColor: paleta.colorPrimario 
               }}
             />
-
             <span className="relative z-10 text-[16px] lg:text-[18px] font-medium font-['Manrope'] drop-shadow-md transition-colors" style={{ color: paleta.textoClaro }}>
               {data.hero.buttonText}
             </span>
-            
             <div 
               className="relative z-10 w-10 h-10 lg:w-[42px] lg:h-[42px] rounded-full flex justify-center items-center shadow-lg transition-colors duration-[400ms]" 
               style={{ 
@@ -77,32 +72,39 @@ export default function HeroT2({ data, paleta }: Props) {
         </div>
       </div>
 
-      {/* VISTA MOBILE */}
-      <div className="flex md:hidden flex-col w-full" style={{ backgroundColor: paleta.fondoPrincipal }}>
-        <div className="relative w-full h-[60vh] min-h-[450px]" style={{ backgroundColor: paleta.fondoOscuro }}>
-          <img src={data.hero.images.mobile} alt="Hero Background" className="w-full h-full object-cover" />
-          <div className="absolute inset-0" style={{ background: `linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 50%, ${paleta.fondoPrincipal} 100%)` }} />
-        </div>
+      {/* VISTA MOBILE (Full Bleed Immersive) */}
+      <div className="flex md:hidden relative w-full h-full flex-col justify-end pb-12 px-6">
+        <picture className="absolute inset-0 w-full h-full">
+          <img src={data.hero.images.mobile} alt="Hero Background" className="w-full h-full object-cover object-center scale-105" />
+        </picture>
         
-        <div className="relative z-10 -mt-20 px-4 pb-16 w-full" style={{ backgroundColor: paleta.fondoPrincipal }}>
-          <div className="rounded-[16px] p-6 shadow-[0px_15px_40px_rgba(0,0,0,0.06)] flex flex-col items-start w-full relative z-20" style={{ backgroundColor: paleta.fondoCajas }}>
-            {/* Se lo sacamos también en mobile por las dudas */}
-            <h1 className="text-[36px] font-bold font-['Manrope'] leading-[1.1] mb-4" style={{ color: paleta.textoPrimario }}>
-              {data.hero.title}
-            </h1>
-            <p className="text-[15px] font-normal font-['Inter'] leading-[26px] mb-6" style={{ color: `${paleta.textoPrimario}B3` }}>
-              {data.hero.subtitle}
-            </p>
-            <a 
-              href={buttonHref}
-              target="_blank" rel="noopener noreferrer"
-              className="w-full py-4 rounded-full flex justify-center items-center gap-2.5 active:scale-95 transition-transform hover:opacity-90 shadow-md"
-              style={{ backgroundColor: paleta.colorPrimario, color: paleta.textoClaro }}
-            >
-              {iconSvg}
-              <span className="text-[15px] font-semibold font-['Inter']">{data.hero.buttonText}</span>
-            </a>
-          </div>
+        {/* Degradado oscuro intenso desde abajo para garantizar lectura perfecta sobre cualquier foto */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90" />
+        
+        {/* Sombra sutil arriba para que la navbar se lea bien */}
+        <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-black/70 to-transparent" />
+
+        <div className="relative z-10 flex flex-col items-start w-full">
+          <h1 className="text-[40px] font-bold font-['Manrope'] leading-[1.05] tracking-tight mb-4 drop-shadow-lg" style={{ color: paleta.textoClaro }}>
+            {data.hero.title}
+          </h1>
+          <p className="text-[16px] font-normal font-['Inter'] leading-[1.6] mb-8 drop-shadow-md" style={{ color: `${paleta.textoClaro}E6` }}>
+            {data.hero.subtitle}
+          </p>
+          
+          <a 
+            href={buttonHref}
+            target="_blank" rel="noopener noreferrer"
+            className="w-full py-4 px-6 rounded-full flex justify-center items-center gap-3 active:scale-95 transition-transform shadow-xl backdrop-blur-sm border"
+            style={{ 
+              backgroundColor: `${paleta.colorPrimario}E6`, // Color primario con leve transparencia
+              borderColor: paleta.colorPrimario,
+              color: '#FFFFFF' // Forzamos blanco puro para el botón
+            }}
+          >
+            {iconSvg}
+            <span className="text-[16px] font-semibold font-['Inter'] tracking-wide">{data.hero.buttonText}</span>
+          </a>
         </div>
       </div>
     </section>
